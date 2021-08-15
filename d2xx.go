@@ -87,6 +87,7 @@ type Handle interface {
 	Close() Err
 	// ResetDevice takes >1.2ms
 	ResetDevice() Err
+	Purge() Err
 	GetDeviceInfo() (uint32, uint16, uint16, Err)
 	EEPROMRead(devType uint32, e *EEPROM) Err
 	EEPROMProgram(e *EEPROM) Err

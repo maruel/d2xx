@@ -31,6 +31,11 @@ func (f *Fake) ResetDevice() d2xx.Err {
 	return 0
 }
 
+// Purge implements d2xx.Handle.
+func (f *Fake) Purge() d2xx.Err {
+	return 0
+}
+
 // GetDeviceInfo implements d2xx.Handle.
 func (f *Fake) GetDeviceInfo() (uint32, uint16, uint16, d2xx.Err) {
 	return f.DevType, f.Vid, f.Pid, 0
@@ -172,6 +177,12 @@ func (l *Log) Close() d2xx.Err {
 func (l *Log) ResetDevice() d2xx.Err {
 	defer l.logDefer("ResetDevice()")()
 	return l.H.ResetDevice()
+}
+
+// Purge implements d2xx.Handle.
+func (l *Log) Purge() d2xx.Err {
+	defer l.logDefer("Purge()")()
+	return l.H.Purge()
 }
 
 // GetDeviceInfo implements d2xx.Handle.

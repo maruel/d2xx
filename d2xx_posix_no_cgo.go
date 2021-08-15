@@ -37,6 +37,10 @@ func (h handle) ResetDevice() Err {
 	return NoCGO
 }
 
+func (h handle) Purge() Err {
+	return NoCGO
+}
+
 func (h handle) GetDeviceInfo() (uint32, uint16, uint16, Err) {
 	return unknown, 0, 0, NoCGO
 }

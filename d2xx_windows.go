@@ -68,6 +68,12 @@ func (h handle) ResetDevice() Err {
 	return Err(r1)
 }
 
+func (h handle) Purge() Err {
+	// C.FT_PURGE_RX|C.FT_PURGE_TX
+	r1, _, _ := pPurge.Call(h.toH(), 3)
+	return Err(r1)
+}
+
 func (h handle) GetDeviceInfo() (uint32, uint16, uint16, Err) {
 	var d uint32
 	var id uint32
@@ -256,6 +262,7 @@ var (
 	pGetLibraryVersion    *syscall.Proc
 	pGetQueueStatus       *syscall.Proc
 	pOpen                 *syscall.Proc
+	pPurge                *syscall.Proc
 	pRead                 *syscall.Proc
 	pResetDevice          *syscall.Proc
 	pSetBaudRate          *syscall.Proc
@@ -294,6 +301,7 @@ func lateInit() {
 		pGetLibraryVersion = find("FT_GetLibraryVersion")
 		pGetQueueStatus = find("FT_GetQueueStatus")
 		pOpen = find("FT_Open")
+		pPurge = find("FT_Purge")
 		pRead = find("FT_Read")
 		pResetDevice = find("FT_ResetDevice")
 		pSetBaudRate = find("FT_SetBaudRate")

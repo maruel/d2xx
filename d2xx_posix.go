@@ -55,6 +55,10 @@ func (h handle) ResetDevice() Err {
 	return Err(C.FT_ResetDevice(h.toH()))
 }
 
+func (h handle) Purge() Err {
+	return Err(C.FT_Purge(h.toH(), C.FT_PURGE_RX|C.FT_PURGE_TX))
+}
+
 func (h handle) GetDeviceInfo() (uint32, uint16, uint16, Err) {
 	var dev C.FT_DEVICE
 	var id C.DWORD
